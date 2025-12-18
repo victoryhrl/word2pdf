@@ -1,24 +1,54 @@
-import Image from "next/image";
+"use client";
 
+import { useState } from "react";
 import { FileDropzone } from "@/components/FileDropzone";
+import { PdfDropzone } from "@/components/PdfDropzone";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<"word2pdf" | "pdf2word">("word2pdf");
+
   return (
     <div className="flex min-h-[calc(100vh-4rem)] flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background px-4 py-24 sm:px-6 lg:px-8">
       <div className="flex w-full max-w-4xl flex-col items-center text-center">
         <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-          Convert Word to PDF{" "}
+          Convert Documents{" "}
           <span className="bg-gradient-to-r from-primary to-blue-600 bg-clip-text text-transparent">
             Instantly
           </span>
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-          The easiest way to convert your DOCX files to professional PDFs.
-          Secure, fast, and free. No registration required.
+          The easiest way to convert your documents. Secure, fast, and free. No registration required.
         </p>
 
-        <div className="mt-12 w-full flex justify-center">
-          <FileDropzone />
+        {/* Tab Switcher */}
+        <div className="mt-10 flex rounded-full border border-border bg-muted/50 p-1">
+          <button
+            onClick={() => setActiveTab("word2pdf")}
+            className={cn(
+              "rounded-full px-6 py-2.5 text-sm font-medium transition-all",
+              activeTab === "word2pdf"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            Word → PDF
+          </button>
+          <button
+            onClick={() => setActiveTab("pdf2word")}
+            className={cn(
+              "rounded-full px-6 py-2.5 text-sm font-medium transition-all",
+              activeTab === "pdf2word"
+                ? "bg-orange-500 text-white shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            )}
+          >
+            PDF → Word
+          </button>
+        </div>
+
+        <div className="mt-10 w-full flex justify-center">
+          {activeTab === "word2pdf" ? <FileDropzone /> : <PdfDropzone />}
         </div>
 
         <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-3">
