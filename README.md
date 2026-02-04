@@ -2,9 +2,11 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## 🌐 Translations
 
-[English](./translations/en/README.md)
+[English](./translations/en/README.md) | [简体中文](./translations/zh-CN/README.md)
 
 ---
+
+
 
 
 ## Getting Started
